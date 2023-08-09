@@ -1,4 +1,6 @@
 var generateBtn = document.querySelector("#generate");
+
+// Length related input
 var inputLengthSet = document.querySelector("#length-set");
 let inputLength = document.querySelector("#input-length");
 
@@ -9,6 +11,10 @@ let checkboxUppercase = document.querySelector("#checkbox-uppercase");
 let checkboxNumeric = document.querySelector("#checkbox-numeric");
 let checkboxSpecial = document.querySelector("#checkbox-special");
 
+// Reset button
+let buttonReset = document.querySelector("#reset");
+
+// Character sets for ease of randomizing
 const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
 const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const specialCharacters = "~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/";
@@ -113,4 +119,13 @@ checkboxUppercase.addEventListener("click", () => {
   if(checkboxLength.checked && !checkboxUppercase.checked) {
     checkboxLowercase.checked = true;
   }
+});
+
+buttonReset.addEventListener("click", () => {
+  checkboxLength.checked = false;
+  checkboxLowercase.checked = false;
+  checkboxUppercase.checked = false;
+  checkboxNumeric.checked = false;
+  checkboxSpecial.checked = false;
+  criteriaLength();
 });
