@@ -118,6 +118,14 @@ button[disabled] {
   overflow: hidden;
 }
 
+#length-input-div {
+  display: none;
+}
+
+#checkbox-characters > input {
+  margin-right: 40px;
+}
+
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
