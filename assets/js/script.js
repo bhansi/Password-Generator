@@ -56,37 +56,37 @@ function generatePassword() {
   }
   
   let password = "";
-  let numberOfCriteria = [];
+  let criteriaSelected = []; // A list of which criteria is selected
 
+  // Add selected criteria to the list
   if(checkboxLowercase.checked)
-    numberOfCriteria++;
+    criteriaSelected.push("lowercase");
 
   if(checkboxUppercase.checked)
-    numberOfCriteria++;
+    criteriaSelected.push("uppercase");
 
   if(checkboxNumeric.checked)
-    numberOfCriteria++;
+    criteriaSelected.push("numeric");
 
   if(checkboxSpecial.checked)
-    numberOfCriteria++;
+    criteriaSelected.push("special");
 
+  // Generate as many characters as the user requests (default 8)
   for(let i = 0; i < passwordLength; i++) {
-    // Generate random number to randomly choose criteria
-    let randomCriteria = Math.floor(Math.random() * numberOfCriteria);
-
-    console.log(randomCriteria);
-
-    if(randomCriteria === 0 && checkboxLowercase.checked) {
-      password = password.concat(lowercaseLetters[Math.floor(Math.random() * 26)]);
-    }
-    else if(randomCriteria === 1 && checkboxUppercase.checked) {
-      password = password.concat(uppercaseLetters[Math.floor(Math.random() * 26)]);
-    }
-    else if(randomCriteria === 2 && checkboxNumeric.checked) {
-      password = password.concat(Math.floor(Math.random() * 10));
-    }
-    else if(randomCriteria === 3 && checkboxSpecial.checked) {
-      password = password.concat(specialCharacters[Math.floor(Math.random() * specialCharacters.length)]);
+    // Randomly selects which character type to generate for current character
+    switch(criteriaSelected[Math.floor(Math.random() * criteriaSelected.length)]) {
+      case "lowercase":
+        password = password.concat(lowercaseLetters[Math.floor(Math.random() * 26)]);
+        break;
+      case "uppercase":
+        password = password.concat(uppercaseLetters[Math.floor(Math.random() * 26)]);
+        break;
+      case "numeric":
+        password = password.concat(Math.floor(Math.random() * 10));
+        break;
+      case "special":
+        password = password.concat(specialCharacters[Math.floor(Math.random() * specialCharacters.length)]);
+        break;
     }
   }
 
