@@ -18,17 +18,17 @@
         </div>
         <div class="card-body">
           <h3>Choose Your Password Criteria</h3>
-          <!-- Criteria Checkbox -->
+          <!-- Criteria checkbox for length -->
           <label for="checkbox-length">Length</label>
           <input id="checkbox-length" type="checkbox"/>
 
-          <!-- Criteria Inputs -->
+          <!-- Criteria input for length -->
           <div id="length-input-div">
             <input id="input-length" type="number"/>
-            <button id="length-set">Set Length</button>
+            <button id="button-length-set">Set Length</button>
           </div>
 
-          <!-- Criteria Checkboxes -->
+          <!-- Criteria checkboxes for characters -->
           <div id="checkbox-characters">          
             <label for="checkbox-lowercase">Lowercase</label>
             <input id="checkbox-lowercase" type="checkbox"/>
@@ -43,9 +43,10 @@
             <input id="checkbox-special" type="checkbox"/>
           </div>
 
-          <button id="reset">Reset Selection</button>
+          <!-- Button to reset the checkbox selection -->
+          <button id="button-reset">Reset Selection</button>
 
-          <!-- Password Output -->
+          <!-- Password output -->
           <textarea
           readonly
           id="password"

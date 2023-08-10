@@ -1,7 +1,7 @@
 var generateBtn = document.querySelector("#generate");
 
 // Length related input
-var inputLengthSet = document.querySelector("#length-set");
+var inputLengthSet = document.querySelector("#button-length-set");
 let inputLength = document.querySelector("#input-length");
 
 // All checkboxes
@@ -12,7 +12,7 @@ let checkboxNumeric = document.querySelector("#checkbox-numeric");
 let checkboxSpecial = document.querySelector("#checkbox-special");
 
 // Reset button
-let buttonReset = document.querySelector("#reset");
+let buttonReset = document.querySelector("#button-reset");
 
 // Character sets for ease of randomizing
 const lowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
@@ -21,6 +21,7 @@ const specialCharacters = "~`!@#$%^&*()_-+={[}]|\\:;\"'<,>.?/";
 
 var passwordLength = 8;
 
+// Displays the length input depending on whether the checkbox is selected or not
 function criteriaLength() {
   let lengthInputDiv = document.querySelector("#length-input-div");
   if(checkboxLength.checked) {
@@ -30,21 +31,23 @@ function criteriaLength() {
   }
   else {
     lengthInputDiv.style.display = "none";
-    passwordLength = 8;
+    passwordLength = 8; // Defaults to length of 8 when length is unselected
   }
 }
 
+// Makes sure that the password length is between 8 and 128 characters
 function validateLength() {
   if(inputLength.value < 8) {
     inputLength.value = 8;
   }
   else if(inputLength.value > 128) {
-    inputLength.value = 128
+    inputLength.value = 128;
   }
 
   passwordLength = Number(inputLength.value);
 }
 
+// Returns true if none of the checkboxes are checked, false otherwise
 function noBoxesChecked() {
   return (
     !checkboxLength.checked &&
@@ -61,7 +64,7 @@ function generatePassword() {
     return "password";
   }
   
-  let password = "";
+  let password = ""; // Holds the generated password
   let criteriaSelected = []; // A list of which criteria is selected
 
   // Add selected criteria to the list
@@ -105,23 +108,39 @@ function writePassword() {
   document.querySelector("#password").value = generatePassword();
 }
 
+// Function to check if character boxes are selected
+// Returns true if at least one is selected, returns false if none are selected
+function isBoxSelected() {
+  return checkboxLowercase.checked || checkboxUppercase.checked || checkboxNumeric.checked || checkboxSpecial.checked;
+}
+
+// If the lowercase box gets unchecked and the other boxes are also unchecked, then check uppercase box
+function checkboxListenerFunction1() {
+  if(checkboxLength.checked && !isBoxSelected()) {
+    checkboxUppercase.checked = true;
+  }
+}
+
+// If a non-lowercase box gets unchecked and the other boxes are unchecked, then check the lowercase box
+function checkboxListenerFunction2() {
+  if(checkboxLength.checked && !isBoxSelected()) {
+    checkboxLowercase.checked = true;
+  }
+}
+
 // Add event listeners
 generateBtn.addEventListener("click", writePassword);
 inputLengthSet.addEventListener("click", validateLength);
 
+// Add event listeners to checkboxes
 checkboxLength.addEventListener("click", criteriaLength);
-checkboxLowercase.addEventListener("click", () => {
-  if(checkboxLength.checked && !checkboxLowercase.checked) {
-    checkboxUppercase.checked = true;
-  }
-});
-checkboxUppercase.addEventListener("click", () => {
-  if(checkboxLength.checked && !checkboxUppercase.checked) {
-    checkboxLowercase.checked = true;
-  }
-});
+checkboxLowercase.addEventListener("click", checkboxListenerFunction1);
+checkboxUppercase.addEventListener("click", checkboxListenerFunction2);
+checkboxNumeric.addEventListener("click", checkboxListenerFunction2);
+checkboxSpecial.addEventListener("click", checkboxListenerFunction2);
 
-buttonReset.addEventListener("click", () => {
+// Add event listener to the reset button
+buttonReset.addEventListener("click", function() {
   checkboxLength.checked = false;
   checkboxLowercase.checked = false;
   checkboxUppercase.checked = false;
