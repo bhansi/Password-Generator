@@ -45,14 +45,14 @@ function generatePassword() {
       case "lowercase":
         password = password.concat(lowercaseLetters[Math.floor(Math.random() * 26)]);
         break;
-        case "uppercase":
-          password = password.concat(uppercaseLetters[Math.floor(Math.random() * 26)]);
-          break;
+      case "uppercase":
+        password = password.concat(uppercaseLetters[Math.floor(Math.random() * 26)]);
+        break;
       case "numeric":
         password = password.concat(Math.floor(Math.random() * 10));
         break;
-        case "special":
-          password = password.concat(specialCharacters[Math.floor(Math.random() * specialCharacters.length)]);
+      case "special":
+        password = password.concat(specialCharacters[Math.floor(Math.random() * specialCharacters.length)]);
         break;
     }
   }
@@ -69,12 +69,11 @@ function writePassword() {
 // Displays the length input depending on whether the checkbox is selected or not
 function criteriaLength() {
   let lengthInputDiv = document.querySelector("#length-input-div");
+  
   if(checkboxLength.checked) {
     lengthInputDiv.style.display = "block";
-    if(!checkboxUppercase.checked)
-    checkboxLowercase.checked = true;
-}
-else {
+  }
+  else {
     lengthInputDiv.style.display = "none";
     passwordLength = 8; // Defaults to length of 8 when length is unselected
   }
