@@ -20,4 +20,4 @@ Enter the desired length and make sure to press the "Set Length" button to save 
 Any combination of character types can be selected to generate a password.
 
 ## URL
-https://bhansi.github.io/Password-Generator/
+[Link to live website.](https://bhansi.github.io/Password-Generator/)
